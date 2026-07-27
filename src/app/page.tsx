@@ -11,15 +11,22 @@ import { LookbookSection } from '@/components/site/lookbook'
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const [products, categories] = await Promise.all([
-    db.product.findMany({
-      where: { active: true },
-      include: { category: true },
-      orderBy: [{ featured: 'desc' }, { reviewCount: 'desc' }],
-      take: 12,
-    }),
-    db.category.findMany({ orderBy: { sortOrder: 'asc' } }),
-  ])
+  let products: Awaited<ReturnType<typeof db.product.findMany>> = []
+  let categories: Awaited<ReturnType<typeof db.category.findMany>> = []
+
+  try {
+    [products, categories] = await Promise.all([
+      db.product.findMany({
+        where: { active: true },
+        include: { category: true },
+        orderBy: [{ featured: 'desc' }, { reviewCount: 'desc' }],
+        take: 12,
+      }),
+      db.category.findMany({ orderBy: { sortOrder: 'asc' } }),
+    ])
+  } catch (err) {
+    console.error('[Home] DB query failed, showing fallback:', err)
+  }
 
   const serialized = products.map((p) => ({
     ...serializeProduct(p),
