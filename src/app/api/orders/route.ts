@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
-import { getCurrentUser, requireUser } from '@/lib/auth'
-import { json, error } from '@/lib/api'
+import { getCurrentUser } from '@/lib/auth'
+import { json, error, requireUser } from '@/lib/api'
 
 export async function GET() {
   const user = await requireUser()
