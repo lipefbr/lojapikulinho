@@ -36,8 +36,11 @@ export const metadata: Metadata = {
   keywords: ["roupas infantis", "moda infantil", "roupas para crianças", "pijulinho", "loja infantil"],
   authors: [{ name: "Pijulinho" }],
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Pijulinho — Roupas Infantis Coloridas",
