@@ -139,7 +139,7 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-xs text-cream/60 md:flex-row">
-          <p>© {new Date().getFullYear()} Pijulinho. Feito com 💛 para a criançada.</p>
+          <p>© {new Date().getFullYear()} Pijulinho. Feito com 💛 para a criançada. {' '}Criado por <a href="https://lipe.host" target="_blank" rel="noopener noreferrer" className="inline-block text-tangerine font-semibold hover:underline transition-colors">Lipe.Host</a></p>
           <div className="flex items-center gap-2">
             <span className="rounded-lg bg-white/10 px-2.5 py-1 font-bold transition-colors hover:bg-tangerine/30">PIX</span>
             <span className="rounded-lg bg-white/10 px-2.5 py-1 font-bold transition-colors hover:bg-tangerine/30">VISA</span>
