@@ -1,5 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 
+// Ensure DATABASE_URL has a sensible default
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = 'file:./db/custom.db'
+}
+
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
@@ -7,7 +12,7 @@ const globalForPrisma = globalThis as unknown as {
 export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
-    log: ['error', 'warn'],
+    log: process.env.NODE_ENV === 'production' ? ['error'] : ['error', 'warn'],
   })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
