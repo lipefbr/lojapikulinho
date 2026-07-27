@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff, LogIn, UserPlus, ArrowRight, Lock, CheckCircle2 } from 'lucide-react'
@@ -23,6 +23,20 @@ import { toast } from 'sonner'
 type Mode = 'login' | 'register'
 
 export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-cream flex items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-tangerine border-t-transparent" />
+        </div>
+      }
+    >
+      <LoginContent />
+    </Suspense>
+  )
+}
+
+function LoginContent() {
   const { user, refresh, loading } = useAuth()
   const router = useRouter()
   const sp = useSearchParams()

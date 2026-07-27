@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,6 +24,20 @@ import { LoyaltyPointsEarned } from '@/components/site/loyalty-badge'
 const UFS = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RO','RR','RS','SC','SP','SE','TO']
 
 export default function CheckoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-cream flex items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-tangerine border-t-transparent" />
+        </div>
+      }
+    >
+      <CheckoutContent />
+    </Suspense>
+  )
+}
+
+function CheckoutContent() {
   const { items, coupon, subtotal, discount, clear, setOpen } = useCart()
   const { user, addresses } = useAuth()
   const router = useRouter()
