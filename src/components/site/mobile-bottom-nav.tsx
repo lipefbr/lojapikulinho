@@ -109,17 +109,13 @@ export function MobileBottomNav() {
           }}
         />
 
-        <ul className="mx-auto flex max-w-md items-stretch justify-around px-2">
+        <ul className="grid w-full grid-cols-5 items-center">
           {items.map((item) => {
             const Icon = item.icon
             const active = item.isActive?.(pathname) ?? false
 
             const inner = (
               <span className="relative flex flex-col items-center justify-center gap-0.5 py-2">
-                {/* Gradient glow behind active item */}
-                {active && (
-                  <span className="pointer-events-none absolute -inset-x-4 -top-1 -bottom-1 rounded-full bg-gradient-to-b from-tangerine/15 to-transparent" />
-                )}
                 <span
                   className={cn(
                     'relative grid h-9 w-9 place-items-center rounded-2xl',
@@ -151,7 +147,6 @@ export function MobileBottomNav() {
                 >
                   {item.label}
                 </span>
-                {/* Active dot indicator (iOS-style) */}
                 {active && (
                   <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-tangerine" />
                 )}
@@ -159,12 +154,12 @@ export function MobileBottomNav() {
             )
 
             const baseClass = cn(
-              'group relative flex flex-1 flex-col items-center justify-center rounded-2xl transition-colors'
+              'group flex w-full flex-col items-center justify-center py-1 transition-colors'
             )
 
             if (item.onClick) {
               return (
-                <li key={item.key} className="flex-1">
+                <li key={item.key}>
                   <button
                     type="button"
                     onClick={item.onClick}
@@ -179,7 +174,7 @@ export function MobileBottomNav() {
             }
 
             return (
-              <li key={item.key} className="flex-1">
+              <li key={item.key}>
                 <Link
                   href={item.href ?? '/'}
                   aria-label={item.label}
